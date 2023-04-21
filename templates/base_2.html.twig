@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+    <title>
+        {% block title %}
+            Dashboard
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ asset('assets/dist/modules/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dist/modules/ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css') }}">
+    <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+    <link rel="stylesheet" href="{{ asset('assets/dist/modules/summernote/summernote-lite.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dist/modules/flag-icon-css/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/demo.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dist/css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+    <link href="{{ asset('node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" />
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+
+<div id="app">
+    <div class="main-wrapper">
+        <div class="navbar-bg"></div>
+        <nav class="navbar navbar-expand-lg main-navbar">
+            <form class="form-inline mr-auto">
+                <ul class="navbar-nav mr-3">
+                    <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+                </ul>
+            </form>
+            <ul class="navbar-nav navbar-right">
+                <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+                        <i class="ion ion-android-person d-lg-none"></i>
+                        {% if app.user %}
+                            <div class="d-sm-none d-lg-inline-block"> Hi, {{ app.user.nom }}</div>
+                        {% endif %}
+                    <div class="dropdown-menu dropdown-menu-right">
+                        {% if app.user %}
+                        <a href="{{ path('app_profil', {'id': app.user.id}) }}" class="dropdown-item has-icon">
+                            <i class="ion ion-android-person"></i> Profile
+                        </a>
+                        {% endif %}
+                        <a href="{{ path('app_logout') }}" class="dropdown-item has-icon">
+                            <i class="ion ion-log-out"></i> Logout
+                        </a>
+                    </div>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="main-sidebar">
+            <aside id="sidebar-wrapper">
+                <div class="sidebar-brand">
+                    <a href="{{ path('app_admistrator') }}">Echo26</a>
+                </div>
+                <div class="sidebar-user">
+                    <div class="sidebar-user-picture">
+                            <img src="{{ asset('assets/images/UserDefault.jpg') }}"/>
+                    </div>
+                    <div class="sidebar-user-details">
+                        {% if app.user %}
+                            <div class="user-name">{{ app.user.nom }}</div>
+                        {% endif %}
+                        <div class="user-role">
+                            Administrator
+                        </div>
+                    </div>
+                </div>
+                <ul class="sidebar-menu">
+                    <li class="menu-header">Tableau de bord</li>
+                    <li class="active">
+                        <a href="{{ path('app_admistrator') }}"><i class="ion ion-speedometer"></i><span>Tableau de bord</span></a>
+                    </li>
+
+
+                    <li>
+                        <a href="#" class="has-dropdown"><i class="ion-person"></i><span>Utilisateurs</span></a>
+                        <ul class="menu-dropdown">
+                            <li><a href="{{ path('app_admistrator_showuseronlist') }}"><i class="ion ion-ios-albums-outline"></i> Liste des Utilisateurs</a></li>
+                            <li><a href="{{ path('app_register') }}"><i class="ion-person-add"></i>Ajouter un Utilisateurs</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#" class="has-dropdown"><i class="ion-clipboard"></i><span>Article</span></a>
+                        <ul class="menu-dropdown">
+                            <li><a href="{{ path('app_article') }}"><i class="ion ion-ios-albums-outline"></i> Liste des articles</a></li>
+                            <li><a href="{{ path('app_article_addarticle') }}"><i class="ion-compose"></i>Ajouter un article</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_commentaire_index') }}"><i class="ion-ios-compose"></i><span>Commentaires</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_image_index') }}"><i class="ion-images"></i><span>Images</span></a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_contact') }}"><i class="ion-email"></i><span>Messages</span></a>
+                    </li>
+{#                    doit être confirmer par le client#}
+{#                    <li>#}
+{#                        <a href=""><i class="ion-email"></i><span>Newsletter</span></a>#}
+{#                    </li>#}
+                    <li>
+                        <a href="#" class="has-dropdown"><i class="ion-ios-box"></i><span>MasterData</span></a>
+                        <ul class="menu-dropdown">
+                            <li><a href="{{ path('app_categorie_index') }}"><i class="ion ion-ios-circle-outline"></i> Catégories</a></li>
+                            <li><a href="{{ path('app_type_index') }}"><i class="ion ion-ios-circle-outline"></i> types d'information</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+        <div class="main-content">
+            {% for message in app.session.flashBag.get('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.session.flashBag.get('error') %}
+                <div class="alert alert-error">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <section class="section">
+                {% block body %}
+                {% endblock %}
+            </section>
+
+        </div>
+        <footer class="main-footer">
+            <div class="footer-left">
+                Copyright &copy; {{ "now"|date("Y") }} <div class="bullet"></div> Design By <a href="#">Lyon Technology</a>
+            </div>
+            <div class="footer-right"></div>
+        </footer>
+    </div>
+</div>
+
+<script src="{{ asset('assets/dist/modules/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/dist/modules/popper.js') }}"></script>
+<script src="{{ asset('assets/dist/modules/tooltip.js') }}"></script>
+<script src="{{ asset('assets/dist/modules/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/dist/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+<script src="{{ asset('assets/dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js') }}"></script>
+<script src="{{ asset('assets/dist/js/sa-functions.js') }}"></script>
+<script src="{{ asset('assets/dist/modules/toastr/toastr.js') }}"></script>
+<script src="{{ asset('assets/dist/modules/chart.min.js') }}"></script>
+<script src="{{ asset('assets/dist/modules/summernote/summernote-lite.js') }}"></script>
+<script src="{{ asset('assets/dist/js/scripts.js') }}"></script>
+<script src="{{ asset('assets/dist/js/custom.js') }}"></script>
+<script src="{{ asset('node_modules/select2/dist/js/select2.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

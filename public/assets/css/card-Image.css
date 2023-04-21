@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+*{
+    box-sizing: border-box;
+}
+.body{
+    font-family: 'Roboto', sans-serif;
+    /* background-color: #f6f7fb; */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0;
+}
+
+h3, p{
+    padding-inline: 2px;
+    margin: 5px 0;
+}
+.content{
+    display: none;
+
+}
+
+.card{
+    width: 350px;
+    /* height: 450px; */
+    border-radius: 10px;
+    box-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+    overflow: hidden;
+    background-color: white;
+}
+.img-holder{
+    width: 350px;
+    height: 55%;
+
+}
+.card-pic{
+    width: 100%;
+    display: block;
+}
+.text{
+    padding: 0.9rem 1.5rem;
+    font-size: 0.8rem;
+}
+h3{
+    margin: 0;
+    width: fit-content;
+}
+.about{
+    display: flex;
+    align-items: end;
+    justify-content: start;
+    margin-top: 1rem;
+}
+.thumbnail{
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.thumbnail img{
+    width: 100%;
+    display: block;
+}
+.details{
+    display: inline-block;
+    margin-top: -1rem;
+}
+.name{
+    margin: 0 0.5rem;
+    font-weight: bold;
+}
+.date{
+    margin: 0.3rem 0.5rem ;
+    font-size: 80%;
+    color: rgb(150, 149, 149);
+}
+.animated{
+    position: relative;
+    transition: 1s;
+}
+.img-holder.animated::before{
+
+    border-radius: 0;
+
+}
+.animated::before{
+    content: '';
+    position: absolute;
+    inset: 0px;
+    border-radius: 10px;
+    background-image:linear-gradient( to right,
+    rgb(249, 244, 244) 0%,
+    rgb(216, 205, 205) 10%,
+    rgb(202, 197, 197) 20%,
+    rgb(247, 246, 246) 100%);
+
+    animation: moveGradient 2s linear infinite;
+    background-size:  200% 100%;
+
+}
+@keyframes moveGradient {
+    0%{
+        background-position: 50% 0% ;
+    }
+    100%{
+        background-position: -150% 0%;
+    }
+}

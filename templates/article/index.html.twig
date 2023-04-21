@@ -1,0 +1,105 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-right">
+                        <a href="{{ path('app_magasin') }}" class="btn btn-sm btn-primary">Aller au site</a>
+                        <a href="{{ path('app_article_addarticle') }}" class="btn btn-sm btn-primary">Nouvelle catégorie</a>
+                    </div>
+                    <h4>Listes des catégories</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th class="text-center">
+                                    #
+                                </th>
+                                <th>Titre</th>
+                                <th>teaser</th>
+                                <th>body</th>
+                                <th>Ecrit Par</th>
+                                <th>Date</th>
+                                <th>catégorie</th>
+                                <th>section</th>
+                                <th>Statut</th>
+                                <th>Action</th>
+                            </tr>
+                            {% for article in articles %}
+                                <tr>
+                                    <td>
+                                        {{ article.id }}
+                                    </td>
+                                    <td>
+                                        {{ article.titre|slice(0,20)~"..." }}
+                                    </td>
+                                    <td>
+                                        {{ article.teaser|slice(0,20)~"..."  }}
+                                    </td>
+                                    <td>
+                                        {{ article.corps|slice(0,10)~"..." }}
+                                    </td>
+                                    <td>
+                                        {{ article.ecritPar }}
+                                    </td>
+                                    <td>
+                                        {{ article.dateAffihcer|date('Y-m-d') }}
+
+                                    </td>
+                                    <td>
+                                        {{ article.categorie }}
+                                    </td>
+                                    <td>
+                                        {{ article.section }}
+                                    </td>
+                                    <td>
+                                        {% if article.statut ? 'Actif' %}
+                                            <div class="badge badge-success">Actif</div>
+                                        {% else %}
+                                            <div class="badge badge-danger">Inactif</div>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-action btn-secondary"><i class="ion-eye"></i></a>
+                                        <a href="{{ path('app_article_editer', {'id': article.id}) }}" class="btn btn-primary btn-action mr-1"><i class="ion ion-edit"></i></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    {% if isPaginated is defined and isPaginated %}
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                {% if page != 1 %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ path('app_article',{page: page - 1, nbre: nbre}) }}">Previous</a>
+                                    </li>
+                                {% endif %}
+                                {% for i in range(1, nbrePage) %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ path('app_article',{page: i, nbre: nbre}) }}">{{ i }}</a>
+                                    </li>
+                                {% endfor %}
+                                {% if page != nbrePage %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ path('app_article',{page: page + 1, nbre: nbre}) }}">Next</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

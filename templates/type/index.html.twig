@@ -1,0 +1,65 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Type{% endblock %}
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-right">
+                        <a href="{{ path('app_type_new') }}" class="btn btn-sm btn-primary">Nouveau Type</a>
+                    </div>
+                    <h4>Listes des types</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th class="text-center">
+                                    #
+                                </th>
+                                <th>Libellé</th>
+                                <th>Créé le</th>
+                                <th>Modifié le</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            {% for type in types %}
+                                <tr>
+                                    <td>
+                                        {{ type.id }}
+                                    </td>
+                                    <td class="align-middle">
+                                        {{ type.libelle }}
+                                    </td>
+                                    <td>
+                                        {{ type.createdAt|date('y-m-d')}}
+                                    </td>
+                                    <td>
+                                        {{ type.modifiedAt|date('y-m-d') }}
+                                    </td>
+                                    <td>
+                                        {% if type.statut ? 'Actif' %}
+                                            <div class="badge badge-success">Actif</div>
+                                        {% else %}
+                                            <div class="badge badge-danger">Inactif</div>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('app_type_show', {'id':type.id}) }}" class="btn btn-action btn-secondary"><i class="ion-eye"></i></a>
+                                        <a href="{{ path('app_type_edit', {'id': type.id}) }}" class="btn btn-primary btn-action mr-1"><i class="ion ion-edit"></i></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

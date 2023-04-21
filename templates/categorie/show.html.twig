@@ -1,0 +1,48 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Categorie{% endblock %}
+
+{% block stylesheets %}
+<link href="{{ asset('assets/css/card.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="centrer">
+        <div class="card-detail">
+            <h2>
+                categorie
+                <br>
+                Information
+            </h2>
+            <hr>
+            <h3>
+                Titre: {{ categorie.libelle }}
+            </h3>
+            <p>
+                <span class="prefix">Id:</span>
+                {{ categorie.id }}
+                <br>
+                <span class="prefix">Statut:</span>
+                {{ categorie.statut ? 'Actif':'Inactif' }}
+                <br>
+                <span class="prefix">Créé le:</span>
+                {{ categorie.createdAt|date('Y-m-d') }}
+                <br>
+                <span class="prefix">Modifié:</span>
+                {{ categorie.modifiedAt|date('Y-m-d') }}
+                <br>
+            </p>
+        </div>
+    </div>
+
+    <div class="float-right">
+        <div class="row">
+            <div class="col">
+                <a href="{{ path('app_categorie_index') }}" class="btn btn-sm btn-primary">Revenir</a>
+            </div>
+            <div class="col">
+                <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-sm btn-primary">Modifier</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

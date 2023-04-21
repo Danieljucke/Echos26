@@ -1,0 +1,40 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Edit Image{% endblock %}
+
+{% block body %}
+
+    <div class="needs-validation">
+        {{ form_start(form) }}
+        <div class="card">
+            <div class="card-header">
+                <h4>Nouvelle image</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Titre</label>
+                    {{ form_widget(form.nom) }}
+                    <div class="invalid-feedback">
+                        Please fill in the title
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Alt</label>
+                    {{ form_widget(form.alt) }}
+                </div>
+                <div class="form-group">
+                    {{ form_widget(form.Uploadfile) }}
+                </div>
+            </div>
+            <div class="card-footer">
+                {{ form_widget(form.Enregistrer, {'attr':{'class':'btn btn-primary'}, 'label':'Update' }) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+        <div class="float-right">
+            <a href="{{ path('app_image_index') }}" class="btn btn-primary">back to list</a>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

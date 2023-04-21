@@ -1,0 +1,23 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Image{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/card-Image.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    {% set image_path = image.chemin %}
+    <div class="body">
+        <div class="card placeholder">
+            <div class="img-holder replaced">
+                <img class="card-pic " src="{{ asset('uploads/Images/'~image_path) }}" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="float-right">
+        <a href="{{ path('app_image_index') }}" class="btn btn-sm btn-primary">back to list</a>
+
+        <a href="{{ path('app_image_edit', {'id': image.id}) }}" class="btn btn-sm btn-primary">edit</a>
+    </div>
+{% endblock %}

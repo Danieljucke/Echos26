@@ -1,0 +1,34 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block stylesheets %}
+<link href="{{ asset('assets/css/card-Image.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    {% set image_path = articles.imageEntete.chemin %}
+    <div class="body">
+        <div class="card placeholder">
+            <div class="img-holder replaced">
+                <img class="card-pic " src="{{ asset('uploads/Images/'~image_path) }}" alt="">
+            </div>
+            <div class="text">
+                <h3 class="replaced">{{ articles.titre }}</h3>
+                <p class="replaced">{{ articles.teaser }}</p>
+                <p class="replaced">{{ articles.corps|slice(0,150)~"..." }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="float-right">
+        <div class="row">
+            <div class="col">
+                <a href="{{ path('app_article') }}" class="btn btn-sm btn-primary">Revenir</a>
+            </div>
+            <div class="col">
+                <a href="{{ path('app_article_editer', {'id': article.id}) }}" class="btn btn-sm btn-primary">Modifier</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

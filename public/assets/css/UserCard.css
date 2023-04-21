@@ -1,0 +1,95 @@
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Raleway Light'), local('Raleway-Light'), url(http://themes.googleusercontent.com/static/fonts/raleway/v6/-_Ctzj9b56b8RgXW8FAriRsxEYwM7FgeyaSgU71cLG0.woff) format('woff');
+}
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Raleway Bold'), local('Raleway-Bold'), url(http://themes.googleusercontent.com/static/fonts/raleway/v6/JbtMzqLaYbbbCL9X6EvaIxsxEYwM7FgeyaSgU71cLG0.woff) format('woff');
+}
+.profileImage {
+    /*background-image: url("https://c1.staticflickr.com/7/6005/5927758528_a2060423e7_b.jpg");*/
+    background-size:cover;
+    border-radius: 130px;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto;
+    border: 3px solid white;
+}
+/*.profileImage:hover {*/
+/*    -webkit-animation: spinY 2s;*/
+/*}*/
+.name {
+    color: white;
+    text-transform: uppercase;
+    font-family: "Raleway",helvetica;
+    margin: 0 auto;
+    width: 97px;
+    padding: 15px;
+}
+.profileImageBg {
+    width: 380px;
+    height: 200px;
+    padding: 20px;
+    background-color: #16a085;
+    display: inline-block;
+    box-shadow: 0px 2px 5px 0px #999;
+}
+.profileWrapper {
+    width: 420px;
+    height: 495px;
+    background-color: #eee;
+    padding: 20px 0;
+    clear:both;
+    margin: 0 auto;
+}
+#customProfile p {
+    font-family: "Raleway",helvetica;
+    font-size: 0.9em;
+    text-rendering: optimizeLegibility;
+    margin: 0px;
+    color: #333;
+}
+#customProfile table, tr, td {
+    border: 0;
+}
+#customProfile table {
+    width:100%
+}
+#customProfile tr td:first-child {
+    width:140px;
+    font-weight: 700;
+    font-color: #333;
+}
+#customProfile tr {
+    height: 30px;
+}
+.tableWrapper {
+    padding: 5px;
+}
+h2, h3, h4, h5, h6 {
+    font-family: "Raleway", helvetica;
+}
+.pageWrapper{
+    max-width: 960px;
+}
+p{max-width: 600px;}
+@-webkit-keyframes spinY
+{
+    0%   {-webkit-transform: rotateZ(0deg); -webkit-transform-origin: 0% 0% 5;}
+    100% {-webkit-transform: rotateZ(360deg); -webkit-transform-origin: 0% 0% 5;}
+}
+#customProfile i {
+    color: #333;
+    padding: 0px 5px;
+}
+#customProfile i:hover {
+    color: #16a085;
+}
+.contactIcons{
+    width: 80px;
+    margin: 0 auto;
+}

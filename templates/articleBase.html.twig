@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>
+        {% block title %}
+            Echo26
+        {% endblock %}
+    </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+
+    <!-- Favicon -->
+    <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ asset('assets/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+<!-- Topbar Start -->
+<div class="container-fluid d-none d-lg-block">
+    <div class="row align-items-center bg-dark px-lg-5">
+        <div class="col-lg-9">
+            <nav class="navbar navbar-expand-sm bg-dark p-0">
+                <ul class="navbar-nav ml-n2">
+                    <li class="nav-item border-right ">
+                        <a class="nav-link text-body small" href="#">{{ "now"|date("l, d F Y") }}</a>
+                    </li>
+                    <li class="nav-item border-right ">
+                        <a class="nav-link text-body small" href="{{ path('app_magasin_contacter') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-body small" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-lg-3 text-right d-none d-md-block">
+            <nav class="navbar navbar-expand-sm bg-dark p-0">
+                <ul class="navbar-nav ml-auto mr-n2">
+                    <li class="nav-item">
+                        <a class="nav-link text-body" href="#"><small class="fab fa-twitter"></small></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-body" href="#"><small class="fab fa-facebook-f"></small></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-body" href="#"><small class="fab fa-linkedin-in"></small></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-body" href="#"><small class="fab fa-instagram"></small></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-body" href="#"><small class="fab fa-youtube"></small></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+</div>
+<!-- Topbar End -->
+
+
+<!-- Navbar Start -->
+<div class="container-fluid p-0" id="home">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2 py-lg-0 px-lg-5">
+        <a href="{{ path('app_magasin') }}"><img src="{{ asset('assets/img/logo.png') }}" class="img-fluid" alt="logo"  id="logo"></a>
+        <a href="{{ path('app_magasin') }}" class="navbar-brand d-block d-lg-none">
+
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
+            {% set cats= category.giveCategory %}
+            <div class="navbar-nav mr-auto py-0">
+                <a href="{{ path('app_magasin') }}" class="nav-item nav-link active">Accueil</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Catégories</a>
+                    <div class="dropdown-menu rounded-0 m-0">
+                        {% for categorie in cats %}
+                            <a href="{{ path('app_magasin_showarticlebycat', {'id':categorie.id}) }}" class="dropdown-item"> {{ categorie.libelle }} </a>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <a href="{{ path('app_magasin_contacter') }}" class="nav-item nav-link">Contact</a>
+            </div>
+            <div class="input-group ml-auto d-none d-lg-flex" style="width: 100%; max-width: 300px;">
+
+            </div>
+        </div>
+    </nav>
+</div>
+<!-- Navbar End -->
+
+
+<!-- Breaking News Start -->
+<div class="container-fluid mt-5 mb-3 pt-3">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <div class="d-flex justify-content-between">
+                    <div class="section-title border-right-0 mb-0" style="width: 180px;">
+                        <h4 class="m-0 text-uppercase font-weight-bold">En ce moment</h4>
+                    </div>
+                    <div class="owl-carousel tranding-carousel position-relative d-inline-flex align-items-center bg-white border border-left-0"
+                         style="width: calc(100% - 180px); padding-right: 100px;">
+                        {% for article in articleService %}
+                        <div class="text-truncate"><a class="text-secondary text-uppercase font-weight-semi-bold" href="{{ path('app_magasin_showsinglearticle',{'id':article.id}) }}">{{ article.teaser }}</a></div>
+{#                        <div class="text-truncate"><a class="text-secondary text-uppercase font-weight-semi-bold" href="">Les Nations Unies rassurent de leur appui au Président Félix Tshisekedi pour parvenir à la paix à l'Est de la RDC</a></div>#}
+{#                        <div class="text-truncate"><a class="text-secondary text-uppercase font-weight-semi-bold" href="">Le Conseil de sécurité de l’ONU est arrivé en RDC</a></div>#}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Breaking News End -->
+
+
+<!-- News With Sidebar Start -->
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            {% block body %}
+
+            {% endblock %}
+            <div class="col-lg-4">
+                <!-- Social Follow Start -->
+                <div class="mb-3">
+                    <div class="section-title mb-0">
+                        <h4 class="m-0 text-uppercase font-weight-bold">Suivez nous</h4>
+                    </div>
+                    <div class="bg-white border border-top-0 p-3">
+                        <a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #39569E;">
+                            <i class="fab fa-facebook-f text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+                            <span class="font-weight-medium">Facebook</span>
+                        </a>
+                        <a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #52AAF4;">
+                            <i class="fab fa-twitter text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+                            <span class="font-weight-medium">Twitter</span>
+                        </a>
+                        <a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #0185AE;">
+                            <i class="fab fa-linkedin-in text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+                            <span class="font-weight-medium">Linkedin</span>
+                        </a>
+                        <a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #C8359D;">
+                            <i class="fab fa-instagram text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+                            <span class="font-weight-medium">Instagram</span>
+                        </a>
+                        <a href="" class="d-block w-100 text-white text-decoration-none mb-3" style="background: #DC472E;">
+                            <i class="fab fa-youtube text-center py-4 mr-3" style="width: 65px; background: rgba(0, 0, 0, .2);"></i>
+                            <span class="font-weight-medium">Youtube</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Social Follow End -->
+
+
+                <!-- Ads Start -->
+                <div class="mb-3">
+                    <div class="section-title mb-0">
+                        <h4 class="m-0 text-uppercase font-weight-bold">Publicté</h4>
+                    </div>
+                    <div class="bg-white text-center border border-top-0 p-3">
+                        <a href=""><img class="img-fluid" src="{{ asset('assets/img/pub.jpg')  }}" alt=""></a>
+                    </div>
+                </div>
+                <!-- Ads End -->
+
+                <!-- Popular News Start -->
+                <div class="mb-3">
+                    <div class="section-title mb-0">
+                        <h4 class="m-0 text-uppercase font-weight-bold">Nouvelles Tendances</h4>
+                    </div>
+                    <div class="bg-white border border-top-0 p-3">
+                        {% for article in articleService.giveArticle|filter(a => a.section == 'tendances' and a.statut)|slice(0, 5) %}
+                            <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">
+                                <img class="img-fluid" width="110" height="110" src="{{ asset('uploads/Images/'~article.imageEntete) }}" alt="">
+                                <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">
+                                    <div class="mb-2">
+                                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">{{ article.categorie }}</a>
+                                        <a class="text-body" href=""><small>{{ article.dateAffihcer|date('Y-m-s') }}</small></a>
+                                    </div>
+                                    <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="{{ path('app_magasin_showsinglearticle', {'id':article.id}) }}">{{ article.titre }}</a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {#                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">#}
+                        {#                            <img class="img-fluid" src="img/news-110x110-2.jpg" alt="">#}
+                        {#                            <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">#}
+                        {#                                <div class="mb-2">#}
+                        {#                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Sécurité</a>#}
+                        {#                                    <a class="text-body" href=""><small>14 Mars, 2023</small></a>#}
+                        {#                                </div>#}
+                        {#                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Nord-Kivu : poursuite des combats entre FARDC et M23 à Ntamugenga...</a>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">#}
+                        {#                            <img class="img-fluid" src="img/news-110x110-3.jpg" alt="">#}
+                        {#                            <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">#}
+                        {#                                <div class="mb-2">#}
+                        {#                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Sécurité</a>#}
+                        {#                                    <a class="text-body" href=""><small>10 Mars, 2023</small></a>#}
+                        {#                                </div>#}
+                        {#                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">Nord-Kivu : les combats s'intensifient entre les FARDC et le M23 à Jomba....</a>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">#}
+                        {#                            <img class="img-fluid" src="img/news-110x110-4.jpg" alt="">#}
+                        {#                            <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">#}
+                        {#                                <div class="mb-2">#}
+                        {#                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Sécurité</a>#}
+                        {#                                    <a class="text-body" href=""><small>11 Mars, 2023</small></a>#}
+                        {#                                </div>#}
+                        {#                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">RDC : le VPM de l'Intérieur promet de soutenir l'ONIP...</a>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="d-flex align-items-center bg-white mb-3" style="height: 110px;">#}
+                        {#                            <img class="img-fluid" src="img/news-110x110-5.jpg" alt="">#}
+                        {#                            <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center border border-left-0">#}
+                        {#                                <div class="mb-2">#}
+                        {#                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">Société</a>#}
+                        {#                                    <a class="text-body" href=""><small>05 Mars, 2023</small></a>#}
+                        {#                                </div>#}
+                        {#                                <a class="h6 m-0 text-secondary text-uppercase font-weight-bold" href="">RDC: Dan Gertler n'a plus d'actifs miniers et pétroliers....</a>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                    </div>
+                </div>
+                <!-- Popular News End -->
+
+{#                <!-- Newsletter Start -->#}
+{#                <div class="mb-3">#}
+{#                    <div class="section-title mb-0">#}
+{#                        <h4 class="m-0 text-uppercase font-weight-bold">Newsletter</h4>#}
+{#                    </div>#}
+{#                    <div class="bg-white text-center border border-top-0 p-3">#}
+{#                        <p>Inscrivez vous à notre Newsletter pour ne rater aucune information.</p>#}
+{#                        <div class="input-group mb-2" style="width: 100%;">#}
+{#                            <input type="text" class="form-control form-control-lg" placeholder="Votre Email">#}
+{#                            <div class="input-group-append">#}
+{#                                <button class="btn btn-primary font-weight-bold px-3">S'inscrire</button>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- Newsletter End -->#}
+
+
+                <!-- Tags Start -->
+                <div class="mb-3">
+                    <div class="section-title mb-0">
+                        <h4 class="m-0 text-uppercase font-weight-bold">Tags</h4>
+                    </div>
+                    <div class="bg-white border border-top-0 p-3">
+                        <div class="d-flex flex-wrap m-n1">
+                            {% for categorie in cats %}
+                                <a href="{{ path('app_magasin_showarticlebycat', {'id': categorie.id }) }}" class="btn btn-sm btn-outline-secondary m-1"> {{ categorie.libelle }} </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- Tags End -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- News With Sidebar End -->
+
+
+<!-- Footer Start -->
+<div class="container-fluid bg-dark1 pt-5 px-sm-3 px-md-5 mt-5">
+    <div class="row py-4">
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h5 class="mb-4 text-white text-uppercase font-weight-bold">ENTRER EN CONTACT</h5>
+            <p class="font-weight-medium"><i class="fa fa-map-marker-alt mr-2"></i>Limété, Kinshasa, RDC</p>
+            <p class="font-weight-medium"><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+            <p class="font-weight-medium"><i class="fa fa-envelope mr-2"></i>info@echo26.cd</p>
+            <h6 class="mt-4 mb-3 text-white text-uppercase font-weight-bold">Suivez nous</h6>
+            <div class="d-flex justify-content-start">
+                <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a class="btn btn-lg btn-secondary btn-lg-square mr-2" href="#"><i class="fab fa-instagram"></i></a>
+                <a class="btn btn-lg btn-secondary btn-lg-square" href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h5 class="mb-4 text-white text-uppercase font-weight-bold">Les plus populaire</h5>
+            {% for article in articleService.giveArticle|filter(a => a.section == 'tendances' and a.statut)|slice(0, 3) %}
+                <div class="mb-3">
+                    <div class="mb-2">
+                        <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2" href="">{{ article.categorie}}</a>
+                        <a class="text-body1" href=""><small>{{ article.dateAffihcer|date('Y-m-d') }}</small></a>
+                    </div>
+                    <a class="small text-body1 text-uppercase font-weight-medium" href="{{ path('app_magasin_showsinglearticle',{'id':article.id}) }}">{{ article.teaser|slice(0,34)~"..." }}</a>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h5 class="mb-4 text-white text-uppercase font-weight-bold">Catégories</h5>
+            <div class="m-n1">
+                {% for cat in cats %}
+                    <a href="{{ path('app_magasin_showarticlebycat',{'id':cat.id}) }}" class="btn btn-sm btn-secondary m-1">{{ cat.libelle }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+        </div>
+    </div>
+</div>
+<div class="container-fluid py-4 px-sm-3 px-md-5" style="background: #111111;">
+    <p class="m-0 text-center">&copy; <a href="#">Echo26</a>. All Rights Reserved.
+
+
+        Design by <a href="">Lyon Technology®</a><br>
+
+    </p>
+</div>
+<!-- Footer End -->
+</div>
+
+<!-- Back to Top -->
+<a href="#home" class="btn btn-primary btn-square back-to-top"><i class="fa fa-arrow-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('assets/lib/easing/easing.min.js') }}"></script>
+<script src="{{ asset('assets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+<!-- Template Javascript -->
+<script src="{{ asset('assets/js/main.js') }}"></script>
+</body>
+
+</html>

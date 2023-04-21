@@ -1,0 +1,74 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <div class="needs-validation">
+        {{ form_start(formArticle) }}
+        <div class="card">
+            <div class="card-header">
+                <h4>Nouvel article</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>Title</label>
+                    {{ form_widget(formArticle.titre) }}
+                    <div class="invalid-feedback">
+                        Please fill in the title
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Teaser</label>
+                    {{ form_widget(formArticle.teaser) }}
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Ecrit par</label>
+                        {{ form_widget(formArticle.ecritPar) }}
+                    </div>
+                    <div class="col">
+                        <label></label>
+                        {{ form_widget(formArticle.dateAffihcer) }}
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <label>Type</label>
+                        {{ form_widget(formArticle.type,{'attr':{'class':'btn btn-secondary dropdown-toggle'}}) }}
+                    </div>
+                    <div class="col">
+                        <label>Categorie</label>
+                        {{ form_widget(formArticle.categorie,{'attr':{'class':'btn btn-secondary dropdown-toggle'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Body</label>
+                    {{ form_widget(formArticle.corps,{'attr':{'class':'summernote-simple'} }) }}
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label>Image de l'article</label>
+                        {{ form_widget(formArticle.imageEntete,{'attr':{'class':'btn btn-secondary dropdown-toggle'}}) }}
+                    </div>
+                    <div class="col">
+                        <label>Image du corps de l'article</label>
+                        {{ form_widget(formArticle.imageCorps,{'attr':{'class':'btn btn-secondary dropdown-toggle'}}) }}
+                    </div>
+                    <div class="col">
+                        <label>la section de l'article</label>
+                        {{ form_widget(formArticle.section,{'attr':{'class':'btn btn-secondary dropdown-toggle'}}) }}
+                    </div>
+                </div>
+                <div class="form-group">
+                        {{ form_widget(formArticle.statut) }}
+            </div>
+            </div>
+            <div class="card-footer">
+                {{ form_widget(formArticle.Ajouter, {'attr':{'class':'btn btn-primary'} }) }}
+{#                                <div class="btn btn-primary">Save Draft</div>#}
+            </div>
+        </div>
+        {{ form_end(formArticle) }}
+    </div>
+{% endblock %}

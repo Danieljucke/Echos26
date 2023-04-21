@@ -1,0 +1,59 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/profil.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row -spacing-a">
+            <div class="col-md-12">
+                <h1>Mon Profil</h1>
+            </div>
+        </div>
+        <div class="row -spacing-a">
+            <div class="col-md-4">
+                    <div class="profile-image">
+                            <img src="{{ asset('assets/images/UserDefault.jpg') }}" class="fullwidth"/>
+                        <div class="edit-profile-image">
+                            <span class="edit-profile-image__information">
+                              <span class="fa fa-camera"></span>
+                              <span class="edit-profile-image__label">
+                                Photo de Profil
+                              </span>
+                            </span>
+                        </div>
+                    </div>
+{#                {% endif %}#}
+            </div>
+
+            <div class="col-md-8">
+                <h5>Administrator</h5>
+                <div class="row -spacing-b">
+                    <div class="col-md-3">
+                        <p class="-typo-copy">Nom</p>
+                        <p class="-typo-copy">Prenom</p>
+                        <p class="-typo-copy">Telephone</p>
+                        <p class="-typo-copy">Date de naissance</p>
+                        <p class="-typo-copy">Adresse mail</p>
+                    </div>
+                        <div class="col-md-3">
+                            <p class="-typo-copy -typo-copy--blue">{{ profil.nom }}</p>
+                            <p class="-typo-copy -typo-copy--blue">{{ profil.prenom }}</p>
+                            <p class="-typo-copy -typo-copy--blue">{{ profil.telephone }}</p>
+                            <p class="-typo-copy -typo-copy--blue">{{ profil.birth|date('Y-m-d') }}</p>
+                            <p class="-typo-copy -typo-copy--blue">{{ profil.email }}</p>
+                        </div>
+                    <div class="col-md-3">
+
+                        <button class="btn btn--green">
+                            <span class="btn__icon fa fa-pencil"></span>
+                            <span class="btn__label"><a href="{{ path('app_profil_edit',{'id': profil.id}) }}">Modifier</a>
+                                        </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

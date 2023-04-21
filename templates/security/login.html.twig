@@ -1,0 +1,35 @@
+
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ asset('assets/css/loginpage.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/scss/_alert.scss') }}">
+    <title>Se Connecter</title>
+</head>
+
+<body>
+{% if error %}
+    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+{% if app.user %}
+    <div class="mb-3">
+        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+    </div>
+{% endif %}
+<div class="main">
+    <p class="sign" align="center">Se Connecter</p>
+    <form class="form1" method="post" action="{{ path('app_login') }}">
+        <input type="email"  placeholder="Email" value="{{ last_username }}" name="email" align="center" id="inputEmail" class="un" autocomplete="email" required autofocus>
+        <input type="password"  placeholder="password" name="password" id="inputPassword" class="pass" align="center" autocomplete="current-password" required>
+        <input type="hidden" name="_csrf_token"
+               value="{{ csrf_token('authenticate') }}"
+        >
+        <button type="submit" class="submit" align="center">Se Connecter</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}utilisateur{% endblock %}
+
+{% block stylesheets %}
+
+    <link href="{{ asset('assets/css/cardUser.css') }}" rel="stylesheet">
+{% endblock %}
+{% block body %}
+    <div class="center-block">
+        <div class="contact-card">
+            <div class="contact-profile">
+                    <img src="{{ asset('assets/images/UserDefault.jpg') }}">
+            </div>
+            <div class="contact-info-container">
+                <div class="contact-info">
+                    <div class="ion-ios-person"></div>
+                    <div class="contact-data">{{ utilisateur.prenom }} {{ utilisateur.nom }}</div>
+                </div>
+                <div class="contact-info">
+                    <div class="ion-android-mail"></div>
+                    <div class="contact-data">{{utilisateur.email}}</div>
+                </div>
+                <div class="contact-info">
+                    <div class="ion-ios-telephone"></div>
+                    <div class="contact-data">{{ utilisateur.telephone }}</div>
+                </div>
+                <div class="contact-data-container">
+                    <div class="ion-calendar"></div>
+                    <div class="contact-data">{{ utilisateur.birth|date('Y-m-s') }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

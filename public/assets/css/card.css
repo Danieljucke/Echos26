@@ -1,0 +1,54 @@
+@import url(//fonts.googleapis.com/css?family=Six+Caps|Open+Sans:400,300,600);
+
+body {
+    padding-top: 50px;
+}
+
+h2 {
+    font: 300 33px/40px 'Open Sans', sans-serif;
+    color: #cfd8ee;
+    margin: 0 0 23px;
+}
+h3 {
+    font: 13px/20px 'Open Sans', sans-serif;
+    color: #e7efff;
+    margin: 0 0 6px;
+}
+p {
+    margin-bottom: 24px;
+    font: 13px/20px 'Open Sans', sans-serif;
+}
+
+hr {
+    background-color: #51596d;
+    border: none;
+    height: 1px;
+    margin: 0 0 21px;
+}
+
+.card-detail {
+    padding: 63px 85px 50px 80px;
+    color: #8391ab;
+    width: 370px;
+    background-color: #574b90;
+    margin: 60px auto;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    /* box-shadow */
+}
+.prefix {
+    width: 48px;
+    display: inline-block;
+
+}
+.email {
+    color: #ffffff;
+    margin-left: 5px;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.email:hover {
+    color: #cfd8ee;
+    text-decoration: none;
+}

@@ -1,0 +1,57 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-header">
+            <div class="float-right">
+                <div class="btn-group">
+                    <div class="dropdown">
+                    </div>
+                </div>
+            </div>
+            <h4>contact</h4>
+        </div>
+        <div class="card-body">
+            {% for cont in contact %}
+                <div id="lg-custom">
+                <div class="list-group">
+                <a href="{#{{ path('app_commentaire_show',{'id':commentaire.id}) }}#}" class="list-group-item list-group-item-action flex-column align-items-start active">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ cont.nom }}</h5>
+                        <small>{{ cont.sujet }}</small>
+                    </div>
+                    <p class="mb-1">{{ cont.message }}</p>
+                    <small>{{ cont.email }}</small>
+                </a>
+                <br>
+            {% else %}
+                <h5>no records found</h5>
+                </div>
+                </div>
+            {% endfor %}
+                {% if isPaginated is defined and isPaginated %}
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    {% if page != 1 %}
+                    <li class="page-item">
+                      <a class="page-link" href="{{ path('app_contact',{page: page - 1, nbre: nbre}) }}">Previous</a>
+                    </li>
+                    {% endif %}
+                    {% for i in range(1, nbrePage) %}
+                    <li class="page-item">
+                      <a class="page-link" href="{{ path('app_contact',{page: i, nbre: nbre}) }}">{{ i }}</a>
+                    </li>
+                    {% endfor %}
+                    {% if page != nbrePage %}
+                    <li class="page-item">
+                      <a class="page-link" href="{{ path('app_contact',{page: page + 1, nbre: nbre}) }}">Next</a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+                {% endif %}
+        </div>
+    </div>
+{% endblock %}

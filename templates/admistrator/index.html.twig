@@ -1,0 +1,159 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+    <h1 class="section-header">
+        <div>Tableau de bord</div>
+    </h1>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-12">
+            <div class="card card-sm-3">
+                <div class="card-icon bg-primary">
+                    <i class="ion ion-person"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Total Admin</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ userCompte }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+            <div class="card card-sm-3">
+                <div class="card-icon bg-danger">
+                    <i class="ion ion-ios-paper-outline"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Articles</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ articleCount }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+            <div class="card card-sm-3">
+                <div class="card-icon bg-warning">
+                    <i class="ion ion-paper-airplane"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Commentaires</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ commentaireCount }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12">
+            <div class="card card-sm-3">
+                <div class="card-icon bg-success">
+                    <i class="ion ion-record"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Nombre d'Images</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ image }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-7 col-md-12 col-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-right">
+                        <a href="{{ path('app_article') }}" class="btn btn-primary">Tout Voir</a>
+                    </div>
+                    <h4>Latest Posts</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for article in articles|slice(0,15) %}
+                            <tr>
+
+                                <td>
+                                    {{ article.titre }}
+                                    <div class="table-links">
+                                        <div class="bullet"></div>
+                                        <a href="{{ path('app_article_show',{'id':article.id}) }}">View</a>
+                                    </div>
+                                </td>
+                                <td>
+                                    {{ article.ecritPar}}
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_article_editer',{'id':article.id}) }}" class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="ion ion-edit"></i></a>
+                                </td>
+                                {% else %}
+                                    <tr>
+                                        <td>
+                                            no records found
+                                        </td>
+                                    </tr>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Commentaires récents</h4>
+                </div>
+                <div class="card-body">
+                    {% for commentaires in commentaire|slice(0,15) %}
+                    <ul class="list-unstyled list-unstyled-border">
+                        <li class="media">
+                            <img class="mr-3 rounded-circle" width="50" src="{{ asset('assets/img/userIcon.png') }}" alt="avatar">
+                            <div class="media-body">
+                                <div class="float-right"><small>{{ commentaires.heurePost|date('m:s') }}</small></div>
+                                <div class="media-title">{{ commentaires.nom }} {{ commentaires.prenom }}</div>
+                                <small>{{ commentaires.commentaire }}</small>
+                            </div>
+                        </li>
+                    </ul>
+                    {% else %}
+                        <ul class="list-unstyled list-unstyled-border">
+                            <li class="media">
+                                <div class="media-body">
+                                    <div class="media-title">no records founds</div>
+                                </div>
+                            </li>
+                        </ul>
+                    {% endfor %}
+                        <div class="text-center">
+                            <a href="{{ path('app_commentaire_index') }}" class="btn btn-primary btn-round">
+                                Tout Voir
+                            </a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

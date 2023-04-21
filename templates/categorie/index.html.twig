@@ -1,0 +1,65 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Categorie index{% endblock %}
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-right">
+                        <a href="{{ path('app_categorie_new') }}" class="btn btn-sm btn-primary">Nouvelle catégorie</a>
+                    </div>
+                    <h4>Listes des catégories</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th class="text-center">
+                                    #
+                                </th>
+                                <th>Libellé</th>
+                                <th>Modifié Par</th>
+                                <th>Créé le</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            {% for categorie in categories %}
+                                <tr>
+                                    <td>
+                                        {{ categorie.id }}
+                                    </td>
+                                    <td class="align-middle">
+                                        {{ categorie.libelle }}
+                                    </td>
+                                    <td>
+                                        {{ categorie.createdAt|date('y-m-d')}}
+                                    </td>
+                                    <td>
+                                        {{ categorie.modifiedAt|date('y-m-d') }}
+                                    </td>
+                                    <td>
+                                        {% if categorie.statut ? 'Actif' %}
+                                            <div class="badge badge-success">Actif</div>
+                                        {% else %}
+                                            <div class="badge badge-danger">Inactif</div>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('app_categorie_show', {'id': categorie.id}) }}" class="btn btn-action btn-secondary"><i class="ion-eye"></i></a>
+                                        <a href="{{ path('app_categorie_edit', {'id': categorie.id}) }}" class="btn btn-primary btn-action mr-1"><i class="ion ion-edit"></i></a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">no records found</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base_2.html.twig' %}
+
+{% block title %}Commentaire{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/commentaire.css') }}">
+{% endblock %}
+
+{% block body %}
+{#    <h1>Commentaire</h1>#}
+
+{#    <table class="table">#}
+{#        <tbody>#}
+{#            <tr>#}
+{#                <th>Id</th>#}
+{#                <td>{{ commentaire.id }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Nom</th>#}
+{#                <td>{{ commentaire.nom }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Prenom</th>#}
+{#                <td>{{ commentaire.prenom }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Email</th>#}
+{#                <td>{{ commentaire.email }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>Commentaire</th>#}
+{#                <td>{{ commentaire.commentaire }}</td>#}
+{#            </tr>#}
+{#            <tr>#}
+{#                <th>HeurePost</th>#}
+{#                <td>{{ commentaire.HeurePost ? commentaire.HeurePost|date('Y-m-d') : '' }}</td>#}
+{#            </tr>#}
+{#        </tbody>#}
+{#    </table>#}
+    <div class="center-block">
+        <div class="at-floating-card">
+            <div class="at-floating-card__thumbnail">
+                <img alt="" src="{{ asset('assets/img/userIcon.png') }}" />
+            </div>
+            <div class="at-floating-card__content">
+                <h2 class="at-floating-card__title">{{ commentaire.nom }} {{ commentaire.prenom }}</h2>
+                <h3 class="at-floating-card__sub-title">{{ commentaire.email }}</h3>
+                <p class="at-floating-card__description">{{ commentaire.commentaire }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="float-right">
+        <div class="row">
+            <div class="col">
+                <a href="{{ path('app_commentaire_index') }}" class="btn btn-sm btn-primary">Revenir</a>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

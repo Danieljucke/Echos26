@@ -1,0 +1,93 @@
+{% extends 'articleBase.html.twig' %}
+
+{% block title %}
+    Article
+{% endblock %}
+
+{% block body %}
+    <div class="col-lg-8">
+
+        <!-- News Detail Start -->
+        <div class="position-relative mb-3">
+            <img class="img-fluid w-100" src="{{ asset('uploads/Images/'~article.imageEntete) }}" style="object-fit: cover;" width="700" height="435">
+            <div class="bg-white border border-top-0 p-4">
+                <div class="mb-3">
+                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
+                       href="{#{{ path('app_magasin_showarticlebycat') }}#}">{{ article.categorie }}</a>
+                    <a class="text-body" href="">{{ article.dateAffihcer|date('Y-m-d') }}</a>
+                </div>
+                <h3 class="mb-3 text-secondary text-uppercase font-weight-bold">{{ article.teaser }}</h3>
+                {% if article.imageCorps is not null %}
+                    <img class="img-fluid w-50 float-left mr-4 mb-2" height="435" width="700" src="{{ asset('uploads/Images/'~article.imageCorps) }}">
+                {% endif %}
+                <p>{{
+                    article.corps
+                    }}
+                </p>
+            </div>
+        </div>
+        <!-- News Detail End -->
+
+        <!-- formComment List Start -->
+        <div class="mb-3">
+            <div class="section-title mb-0">
+                <h4 class="m-0 text-uppercase font-weight-bold">{{ nbrcomment }} Commentaires</h4>
+            </div>
+            {% for comment in commentaire %}
+                <div class="bg-white border border-top-0 p-4">
+                    <div class="media mb-4">
+                        <img src="{{ asset('assets/img/userIcon.png') }}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                        <div class="media-body">
+                            <h6><a class="text-secondary font-weight-bold" href="">{{ comment.prenom }} {{ comment.nom }}</a> <small><i>{{ comment.heurePost|date('H:m:s') }}</i></small></h6>
+                            <p>{{ comment.commentaire }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- formComment List End -->
+
+        <!-- formComment Form Start -->
+        <div class="mb-3">
+            {{ form_start(form) }}
+            <div class="section-title mb-0">
+                <h4 class="m-0 text-uppercase font-weight-bold">Laisser un Commentaire</h4>
+            </div>
+            <div class="bg-white border border-top-0 p-4">
+            {{ form_start(form) }}
+                <div class="form-row">
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name">Prenom *</label>
+                            {{ form_widget(form.prenom, {'attr':{'class':'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="name">Nom *</label>
+                            {{ form_widget(form.nom, {'attr':{'class':'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            {{ form_widget(form.email, {'attr':{'class':'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    {{ form_widget(form.commentaire, {'attr':{'class':'form-control','col':'30','rows':'5'}}) }}
+                </div>
+                <div class="form-group mb-0">
+                    {{ form_widget(form.Commenter, {'attr':{'class':'btn btn-primary font-weight-semi-bold py-2 px-3'}}) }}
+                </div>
+                 {{ form_row(form._token) }}
+            {{ form_end(form) }}
+            </div>
+
+        </div>
+        <!-- formComment Form End -->
+    </div>
+{% endblock %}
