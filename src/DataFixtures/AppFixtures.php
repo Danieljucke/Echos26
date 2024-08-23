@@ -17,10 +17,10 @@ class AppFixtures extends Fixture
     {
         $user = new User();
 
-        $user->setEmail('imukendi50@gmail.com')
-                ->setNom('Isaac')
-                ->setPrenom('Mukendi')
-                ->setTelephone('+243 815009031')
+        $user->setEmail('admin@info.com')
+                ->setNom('Admin')
+                ->setPrenom('user')
+                ->setTelephone('+243 80000000000')
                 ->setBirth(new \DateTimeImmutable('now'))
                 ->setRoles(['ROLE_ADMIN'])
                 ->setPassword($this->hasher->hashPassword($user,'adminecho262023'))
